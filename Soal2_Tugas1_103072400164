@@ -1,0 +1,46 @@
+# Fungsi untuk mengembalikan Fibonacci ke-n
+def fibonacci(n):
+    if n <= 0:
+        return 0
+    elif n == 1:
+        return 0
+    elif n == 2:
+        return 1
+    
+    a = 0
+    b = 1
+    for i in range(3, n + 1):
+        c = a + b
+        a = b
+        b = c
+    return b
+
+
+# Prosedur untuk mencetak deret Fibonacci dari 1 sampai n
+def cetakFibonacci(n):
+    a = 0
+    b = 1
+    print("Deret Fibonacci:")
+    
+    for i in range(1, n + 1):
+        if i == 1:
+            print(a, end=" ")
+        elif i == 2:
+            print(b, end=" ")
+        else:
+            c = a + b
+            print(c, end=" ")
+            a = b
+            b = c
+    print()
+
+
+# Program utama
+n = int(input("Masukkan nilai n: "))
+
+# Memanggil fungsi
+hasil = fibonacci(n)
+print("Fibonacci ke-", n, "adalah:", hasil)
+
+# Memanggil prosedur
+cetakFibonacci(n)
