@@ -1,0 +1,19 @@
+# fungsi untuk mengecek tahun kabisat
+def isKabisat(tahun):
+    if (tahun % 400 == 0) or (tahun % 4 == 0 and tahun % 100 != 0):
+        return True
+    else:
+        return False
+
+
+# meminta input tahun
+tahun = int(input("Masukkan tahun: "))
+
+# memanggil fungsi
+hasil = isKabisat(tahun)
+
+# menampilkan hasil
+if hasil:
+    print(tahun, "adalah tahun kabisat")
+else:
+    print(tahun, "bukan tahun kabisat")
