@@ -1,0 +1,96 @@
+import numpy as np
+
+# fungsi input data
+def input_data():
+    while True:
+        try:
+            n = int(input("Masukkan jumlah mahasiswa: "))
+            if n <= 0:
+                print("Jumlah harus lebih dari 0!")
+            else:
+                break
+        except ValueError:
+            print("Input harus berupa angka!")
+
+# list menyimpan data
+    nim = []
+    nama = []
+    tahun = []
+    nilai = []
+ 
+# fungsi Perulangan
+
+    for i in range(n):
+        print(f"\n Data Mahasiswa ke-{i+1}")
+
+        nim_input = input("NIM : ")
+        nama_input = input("Nama : ")
+
+        while True:
+            try:
+                tahun_input = int(input("Tahun Masuk : "))
+                break
+            except ValueError:
+                print("Tahun harus berupa angka!")
+
+        while True:
+            try:
+                nilai_input = float(input("Nilai : "))
+                break
+            except ValueError:
+                print("Nilai harus berupa angka!")
+
+        nim.append(nim_input)
+        nama.append(nama_input)
+        tahun.append(tahun_input)
+        nilai.append(nilai_input)
+
+    return nim, nama, tahun, np.array(nilai)
+
+
+# fungsi menampilkan data
+def tampil_data(nim, nama, tahun, nilai):
+    print("\n===== DATA MAHASISWA =====")
+    for i in range(len(nim)):
+        print(f"{i+1}. NIM: {nim[i]} | Nama: {nama[i]} | Tahun: {tahun[i]} | Nilai: {nilai[i]}")
+
+
+# fungsi statistik nilai
+def statistik(nilai):
+    if len(nilai) == 0:
+        print("Tidak ada data nilai.")
+        return
+
+    print("\n===== STATISTIK NILAI =====")
+    print("Nilai Tertinggi :", np.max(nilai))
+    print("Nilai Terendah  :", np.min(nilai))
+    print("Rata-rata Nilai :", round(np.mean(nilai), 2))
+
+
+# fungsi pencarian data
+def cari_data(nim, nama, tahun, nilai):
+    cari = input("\nMasukkan Nim atau Nama yang ingin dicari: ")
+    ditemukan = False
+
+    for i in range(len(nim)):
+        if cari == nim[i] or cari.lower() == nama[i].lower():
+            print("\nData Ditemukan:")
+            print(f"Nim         : {nim[i]}")
+            print(f"Nama        : {nama[i]}")
+            print(f"Tahun Masuk : {tahun[i]}")
+            print(f"Nilai       : {nilai[i]}")
+            ditemukan = True
+            break
+
+    if not ditemukan:
+        print("Data tidak ditemukan.")
+
+
+# PROGRAM UTAMA 
+nim, nama, tahun, nilai = input_data()
+
+tampil_data(nim, nama, tahun, nilai)
+
+statistik(nilai)
+
+cari_data(nim, nama, tahun, nilai)
