@@ -1,1 +1,98 @@
+import numpy as np
 
+# fungsi input data barang
+def input_barang():
+    while True:
+        try:
+            n = int(input("Masukkan jumlah barang: "))
+            if n <= 0:
+                print("Jumlah barang harus lebih dari 0!")
+            else:
+                break
+        except ValueError:
+            print("Input harus berupa angka!")
+
+# list menyimpan data
+    kode = []
+    nama = []
+    jumlah = []
+    harga = []
+
+# fungsi perulangan
+    for i in range(n):
+        print(f"\n=== Data Barang ke-{i+1} ===")
+
+        kode_input = input("Kode Barang : ")
+        nama_input = input("Nama Barang : ")
+
+        while True:
+            try:
+                jumlah_input = int(input("Jumlah Barang : "))
+                break
+            except ValueError:
+                print("Jumlah harus berupa angka!")
+
+        while True:
+            try:
+                harga_input = float(input("Harga per Unit : "))
+                break
+            except ValueError:
+                print("Harga harus berupa angka!")
+
+        kode.append(kode_input)
+        nama.append(nama_input)
+        jumlah.append(jumlah_input)
+        harga.append(harga_input)
+
+    return kode, nama, np.array(jumlah), np.array(harga)
+
+
+# fungsi menampilkan data inventaris
+def tampil_barang(kode, nama, jumlah, harga):
+    print("\n===== DATA INVENTARIS GUDANG =====")
+    
+    total = jumlah * harga
+    
+    for i in range(len(kode)):
+        print(f"{i+1}. Kode: {kode[i]} | Nama: {nama[i]} | Jumlah: {jumlah[i]} | Harga: {harga[i]} | Total: {total[i]}")
+
+
+# fungsi menghitung total inventaris
+def total_inventaris(jumlah, harga):
+    total = jumlah * harga
+
+    print("\n===== TOTAL NILAI INVENTARIS =====")
+    print("Total Nilai Semua Barang :", np.sum(total))
+
+
+# fungsi pencarian barang
+def cari_barang(kode, nama, jumlah, harga):
+    cari = input("\nMasukkan Kode Barang atau Nama Barang yang ingin dicari: ")
+    ditemukan = False
+
+    total = jumlah * harga
+
+    for i in range(len(kode)):
+        if cari == kode[i] or cari.lower() == nama[i].lower():
+            print("\nBarang Ditemukan:")
+            print(f"Kode   : {kode[i]}")
+            print(f"Nama   : {nama[i]}")
+            print(f"Jumlah : {jumlah[i]}")
+            print(f"Harga  : {harga[i]}")
+            print(f"Total  : {total[i]}")
+            ditemukan = True
+            break
+
+    if not ditemukan:
+        print("Barang tidak ditemukan.")
+
+
+# ================= PROGRAM UTAMA =================
+
+kode, nama, jumlah, harga = input_barang()
+
+tampil_barang(kode, nama, jumlah, harga)
+
+total_inventaris(jumlah, harga)
+
+cari_barang(kode, nama, jumlah, harga)
